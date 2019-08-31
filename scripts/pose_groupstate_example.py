@@ -50,8 +50,8 @@ def main():
 
     # 手動で姿勢を指定するには以下のように指定
     target_pose = geometry_msgs.msg.Pose()
-    target_pose.position.x = 0.1
-    target_pose.position.y = 0.0
+    target_pose.position.x = 0.2
+    target_pose.position.y = 0.16
     target_pose.position.z = 0.1
     q = quaternion_from_euler(-3.14, 0.0, -3.14/2.0)
     target_pose.orientation.x = q[0]
