@@ -12,7 +12,6 @@ class Object_position:
 
     def __init__(self):
         self.sub = rospy.Subscriber("clusters", MarkerArray, self.callback)
-        self.r = rospy.Rate(50)
         self.dx = 0
         self.dy = 0
 
@@ -23,16 +22,11 @@ class Object_position:
             self.dy = m.pose.position.y
  
     def offset(self):
-        print("Please put it anywhere within 5 seconds")
-        rospy.sleep(5.0)
+        rospy.sleep(3.0)
 
-        if(self.dx == 0 and self.dy == 0):
-            print("Wait")
-
-        else:
-            self.ob_x = 0.3 - self.dy 
-            self.ob_y = -self.dx
-            print(self.ob_x, self.ob_y)
+        self.ob_x = 0.3 - self.dy 
+        self.ob_y = -self.dx
+        print(self.ob_x, self.ob_y)
 
     def manipulation(self, x, y):
         robot = moveit_commander.RobotCommander()
@@ -48,6 +42,7 @@ class Object_position:
         arm_initial_pose = arm.get_current_pose().pose
 
         # 何かを掴んでいた時のためにハンドを開く
+        print("Open Hand")
         gripper.set_joint_value_target([1.2, 1.2])
         gripper.go()
 
@@ -56,10 +51,11 @@ class Object_position:
         arm.set_named_target("vertical")
         arm.go()
 
+        print("Move")
         target_pose = geometry_msgs.msg.Pose()
         target_pose.position.x = x
         target_pose.position.y = y
-        target_pose.position.z = 0.1
+        target_pose.position.z = 0.12
         q = quaternion_from_euler( -3.14, 0.0, -3.14/2.0 )
         target_pose.orientation.x = q[0]
         target_pose.orientation.y = q[1]
@@ -69,7 +65,8 @@ class Object_position:
         arm.go()				# 実行
 
         #ハンドを閉じる
-        gripper.set_joint_value_target([0.43, 0.43])
+        print("Close Hand")
+        gripper.set_joint_value_target([0.42, 0.42])
         gripper.go()
 
         # 持ち上げる
@@ -136,8 +133,6 @@ class Object_position:
             while not rospy.is_shutdown():
                 self.offset()
                 self.manipulation(self.ob_x, self.ob_y)
-                #print("Place it in the next place within 5 seconds")
-                #rospy.spin()
         except rospy.ROSInterruptException:
             pass
 

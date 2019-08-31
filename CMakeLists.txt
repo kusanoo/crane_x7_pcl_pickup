@@ -138,18 +138,8 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/my_crane_x7_node.cpp)
 
-add_executable(pcl_planefil src/pcl_planefil.cpp)
-target_link_libraries(pcl_planefil 
-    ${catkin_LIBRARIES}
-    )
-
-add_executable(pcl_seg src/pcl_seg.cpp)
-target_link_libraries(pcl_seg 
-    ${catkin_LIBRARIES}
-    )
-
-add_executable(close_position src/close_position.cpp)
-target_link_libraries(close_position 
+add_executable(pcl_clustering src/pcl_clustering.cpp)
+target_link_libraries(pcl_clustering 
     ${catkin_LIBRARIES}
     )
 

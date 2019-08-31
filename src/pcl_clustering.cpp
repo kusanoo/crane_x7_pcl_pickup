@@ -32,20 +32,23 @@ private:
   ros::Publisher pub_transformed_;
   PointCloud::Ptr cloud_tranformed_;
 
+  // 範囲指定
   pcl::PassThrough<PointT> pass_;
   PointCloud::Ptr cloud_passthrough_;
   ros::Publisher pub_passthrough_;
   
+  // ダウンサンプリング
   pcl::VoxelGrid<PointT> voxel_;
   PointCloud::Ptr cloud_voxel_;
   ros::Publisher pub_voxel_;
 
+  // 平面を取り除く
   pcl::SACSegmentation<PointT> seg_;
   pcl::ExtractIndices<PointT> ex_;
   PointCloud::Ptr cloud_seg_;
   ros::Publisher pub_ex_;
 
-  //euclideancluster
+  // クラスタリング
   pcl::search::KdTree<PointT>::Ptr tree_;
   pcl::EuclideanClusterExtraction<PointT> ec_;
   ros::Publisher pub_clusters_;
@@ -69,7 +72,7 @@ private:
         pub_transformed_.publish(cloud_tranformed_);
         cloud_src = cloud_tranformed_;
       }
-      // ここに cloud_src に対するフィルタ処理を書く
+
       pass_.setInputCloud(cloud_src);
       pass_.filter(*cloud_passthrough_);
       pub_passthrough_.publish(cloud_passthrough_);
@@ -78,17 +81,15 @@ private:
       voxel_.filter(*cloud_voxel_);
       pub_voxel_.publish(cloud_voxel_);
 
+
       int i=0, nr_points = cloud_voxel_->points.size();
       while (cloud_voxel_->points.size() > 0.3 * nr_points)
       {
         seg_.setInputCloud(cloud_voxel_);
         seg_.segment(*inliers, *coefficients);
-        //if (inliers -> indices.size() == 0)
         
         ex_.setInputCloud(cloud_voxel_);
         ex_.setIndices(inliers);
-        //ex_.setNegative(false);
-        //ex_.filter(*cloud_seg_);
 
         ex_.setNegative(true);
         ex_.filter(*cloud_voxel_);
@@ -115,6 +116,7 @@ private:
         Eigen::Vector4f cluster_size = max_pt - min_pt;
         if (cluster_size.x() > 0 && cluster_size.y() > 0 && cluster_size.z() > 0)
         {
+          // 特定のクラスタの検出  
           ROS_INFO("cluster_x: %f, cluster_y: %f, cluster_z: %f", cluster_size.x(), cluster_size.y(), cluster_size.z());
           bool is_ok = true;
           if (cluster_size.x() < 0.04 || cluster_size.x() > 0.4)
@@ -132,6 +134,8 @@ private:
           visualization_msgs::Marker marker =
               makeMarker(
                   frame_id, "cluster", marker_id, min_pt, max_pt, 0.0f, 1.0f, 0.0f, 0.5f);
+          
+          // 特定のクラスタの中で最も近いクラスタの検出
           if (is_ok)  
           {
             marker.ns = "ok_cluster";
@@ -229,32 +233,29 @@ public:
     cloud_tranformed_.reset(new PointCloud());
 
     //PassThrough    
-    pass_.setFilterFieldName("z");
-    pass_.setFilterLimits(0.1, 1.0);
+    pass_.setFilterFieldName("z"); // Z軸でフィルタをかける
+    pass_.setFilterLimits(0.1, 1.0); // 0.1 ~ 1.0mの間にある点群の抽出 
     cloud_passthrough_.reset(new PointCloud());
     pub_passthrough_ = nh_.advertise<PointCloud>("passthrough", 1);
 
     //voxel_grid
-    voxel_.setLeafSize(0.01f, 0.01f, 0.01f);
+    voxel_.setLeafSize(0.01f, 0.01f, 0.01f); // 0.01m間隔でダウンサンプリング
     cloud_voxel_.reset(new PointCloud());
     pub_voxel_ = nh_.advertise<PointCloud>("voxel", 1);
 
-   //Seg_plane
-    //pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
-    //pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
+    //Seg_plane
     seg_.setOptimizeCoefficients(true);
     seg_.setModelType(pcl::SACMODEL_PLANE);  
     seg_.setMethodType(pcl::SAC_RANSAC);
     seg_.setMaxIterations(1000);
-    seg_.setDistanceThreshold(0.01);
-    //seg_.segment(*inliers, *coefficients);
+    seg_.setDistanceThreshold(0.01); // 閾値
     pub_ex_ = nh_.advertise<PointCloud>("seg_plane", 1);
 
     //euclideancluster
     tree_.reset(new pcl::search::KdTree<PointT>());
-    ec_.setClusterTolerance(0.02);
-    ec_.setMinClusterSize(20);
-    ec_.setMaxClusterSize(200);
+    ec_.setClusterTolerance(0.02); // 2cm以上離れていたら別クラスタ
+    ec_.setMinClusterSize(20); // クラスタを構成する点群の数の最低
+    ec_.setMaxClusterSize(200); // 最高
     ec_.setSearchMethod(tree_);
     pub_clusters_ = nh_.advertise<visualization_msgs::MarkerArray>("clusters", 1);
   }
@@ -265,7 +266,7 @@ int main(int argc, char *argv[])
   ros::init(argc, argv, "pointcloud_node");
 
   PointcloudNode pointcloud_test;
-  ROS_INFO("Hello Point Cloud!");
+  ROS_INFO("Point Cloud");
   ros::spin();
 }
 
