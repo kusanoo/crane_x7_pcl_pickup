@@ -17,17 +17,17 @@ class Object_position:
         if (m.ns == "target_cluster"):
             self.dx = m.pose.position.x
             self.dy = m.pose.position.y
-            rospy.loginfo("Position: [%f, %f]"%(self.dx,self.dy))
+            #rospy.loginfo("Position: [%f, %f]"%(self.dx,self.dy))
  
-    def listener(self):
-        print(self.dx, self.dy)
+    def run(self):
+        try:
+            while not rospy.is_shutdown():
+                rospy.sleep(0.5)
+                print(self.dx, self.dy)
+                self.r.sleep()
+        except rospy.ROSInterruptException:
+            pass
 
 if __name__ == '__main__':
-    try:
-        if not rospy.is_shutdown():
-           rospy.init_node("Object_position")
-           op = Object_position()
-           rospy.spin()
-           #op.listener()
-    except rospy.ROSInterruptException:
-        pass
+    rospy.init_node("Object_position")
+    Object_position().run()

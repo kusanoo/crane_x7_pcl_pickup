@@ -49,19 +49,17 @@ def main():
     gripper.go()
 
     # 手動で姿勢を指定するには以下のように指定
-    """
     target_pose = geometry_msgs.msg.Pose()
-    target_pose.position.x = 0.0
+    target_pose.position.x = 0.1
     target_pose.position.y = 0.0
-    target_pose.position.z = 0.624
-    q = quaternion_from_euler( 0.0, 0.0, 0.0 )
+    target_pose.position.z = 0.1
+    q = quaternion_from_euler(-3.14, 0.0, -3.14/2.0)
     target_pose.orientation.x = q[0]
     target_pose.orientation.y = q[1]
     target_pose.orientation.z = q[2]
     target_pose.orientation.w = q[3]
     arm.set_pose_target( target_pose )	# 目標ポーズ設定
     arm.go()							# 実行
-    """
 
     # 移動後の手先ポーズを表示
     arm_goal_pose = arm.get_current_pose().pose
