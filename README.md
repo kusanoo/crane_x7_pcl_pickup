@@ -1,24 +1,42 @@
 # Crane_x7 PCL Pick_up
 
-CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモノを掴む
+CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモノを掴みます
 
 ## Usage
 
-### CRANE-X7のパッケージをインストール
+### CRANE-X7のパッケージのインストール方法
 
-[CRANE-X7のパッケージ](https://github.com/rt-net/crane_x7_ros)のインストール手順に従う
+[CRANE-X7のパッケージ](https://github.com/rt-net/crane_x7_ros)のインストール手順に従います
 
+Gazebo上で動くことを確認してください
 
-crane_x7_description/urdf/crane_x7_mounting_plate.xacro を my_crane_x7/urdf/crane_x7_mounting_plate.xacro と入れ替える
+### 本パッケージのダウンロード方法
 
-### 起動するか確認する
+  ```bash
+  cd ~/catkin_ws/src
+  git clone https://github.com/kusanoo/my_crane_x7.git
+  ```
+
+- `catkin_make`を使用してビルドします
+
+  ```bash
+  cd ~/catkin_ws && catkin_make
+  source ~/catkin_ws/devel/setup.bash
+  ```
+
+### ロボットのCameraの設定方法
+  
+`crane_x7_description/urdf/crane_x7_mounting_plate.xacro` を `my_crane_x7/urdf/crane_x7_mounting_plate.xacro` と入れ替える
+
+以下のコマンドを実行し、確認します
 
 ```sh
 roslaunch crane_x7_description display.launch
 ```
+
 <img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="620px">
 
-上のようになったら成功
+上のようになったら成功です
 
 ### Gazebo,Rvizの起動
 
@@ -26,7 +44,7 @@ roslaunch crane_x7_description display.launch
 roslaunch crane_x7_gazebo crane_x7_with_table.launch use_effort_gripper:=true　
 ```
  
-### 立ち上がったら、次のコマンドで点群の処理を実行する
+立ち上がったら、次のコマンドで点群の処理を実行します
 
 ```sh
 rosrun my_crane_x7 pcl_clustering
@@ -34,19 +52,19 @@ rosrun my_crane_x7 pcl_clustering
 
 ### Rvizで maker を追加する
 
-addを押す
+addを押します
 
 <img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="620px">
 
-By topic を押す
+By topic を押します
 
 <img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="620px">
 
-MarkerArrayを選択し,OKを押す
+MarkerArrayを選択し,OKを押します
 
 <img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="620px">
 
-Rviz上に紫のクラスタが表示される
+Rviz上に紫のクラスタが表示されます
   
 <img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="620px">
    
@@ -56,7 +74,7 @@ Rviz上に紫のクラスタが表示される
 rosrun my_crane_x7 pick_up_object.py
 ``` 
 
-動作させると[こちら](https://youtu.be/ZMpj_mBggjw)のような動きになる
+動作させると[こちら](https://youtu.be/ZMpj_mBggjw)のような動きになります
 
 ## 参考サイト
 
