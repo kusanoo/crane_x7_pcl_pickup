@@ -34,7 +34,7 @@ Gazebo上で動くことを確認してください
 roslaunch crane_x7_description display.launch
 ```
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="620px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="640px">
 
 上のようになったら成功です
 
@@ -54,19 +54,19 @@ rosrun my_crane_x7 pcl_clustering
 
 addを押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="620px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="640px">
 
 By topic を押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="620px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="640px">
 
 MarkerArrayを選択し,OKを押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="620px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="640px">
 
 Rviz上に紫のクラスタが表示されます
   
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="620px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="640px">
    
 ### モノを掴むスクリプトの実行
 
