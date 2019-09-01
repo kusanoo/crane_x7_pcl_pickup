@@ -2,13 +2,11 @@
 
 CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモノを掴む
 
-CRANE-X7のパッケージ
-
-https://github.com/rt-net/crane_x7_ros
-
 ## Usage
 
 ### CRANE-X7のパッケージをインストール
+
+[CRANE-X7のパッケージ](https://github.com/rt-net/crane_x7_ros)のインストール手順に従う
 
 その中の crane_x7_description/urdf/crane_x7_mounting_plate.xacro を my_crane_x7/urdf/x7_mounting_plate.xacro と入れ替える
 
@@ -17,7 +15,7 @@ https://github.com/rt-net/crane_x7_ros
 ```sh
 roslaunch crane_x7_description display.launch
 ```
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/crane_rviz.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="420px">
 
 ### Gazebo,Rvizの起動
 
@@ -56,4 +54,15 @@ rosrun my_crane_x7 pick_up_object.py
 ``` 
 
 動作させると[こちら](https://youtu.be/ZMpj_mBggjw)のような動きになる
+
+## 参考サイト
+
+・rt-netさん
+https://github.com/rt-net/crane_x7_ros 
+
+・からあげさん
+https://karaage.hatenadiary.jp/entry/2017/09/11/073000
+
+・Masaki Hayashiさん
+https://www.slideshare.net/payashim/20141004cvsaisentanpclandwhy3dvision
 
