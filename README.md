@@ -8,14 +8,17 @@ CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモ
 
 [CRANE-X7のパッケージ](https://github.com/rt-net/crane_x7_ros)のインストール手順に従う
 
-その中の crane_x7_description/urdf/crane_x7_mounting_plate.xacro を my_crane_x7/urdf/x7_mounting_plate.xacro と入れ替える
+
+crane_x7_description/urdf/crane_x7_mounting_plate.xacro を my_crane_x7/urdf/crane_x7_mounting_plate.xacro と入れ替える
 
 ### 起動するか確認する
 
 ```sh
 roslaunch crane_x7_description display.launch
 ```
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="620px">
+
+上のようになったら成功
 
 ### Gazebo,Rvizの起動
 
@@ -33,19 +36,19 @@ rosrun my_crane_x7 pcl_clustering
 
 addを押す
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="620px">
 
 By topic を押す
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="620px">
 
 MarkerArrayを選択し,OKを押す
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="620px">
 
 Rviz上に紫のクラスタが表示される
   
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="420px">
+<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="620px">
    
 ### モノを掴むスクリプトの実行
 
@@ -57,12 +60,15 @@ rosrun my_crane_x7 pick_up_object.py
 
 ## 参考サイト
 
-・rt-netさん
+- rt-netさん
 https://github.com/rt-net/crane_x7_ros 
 
-・からあげさん
+- pcl
+http://www.pointclouds.org
+
+- からあげさん
 https://karaage.hatenadiary.jp/entry/2017/09/11/073000
 
-・Masaki Hayashiさん
+- Masaki Hayashiさん
 https://www.slideshare.net/payashim/20141004cvsaisentanpclandwhy3dvision
 
