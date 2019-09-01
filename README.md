@@ -2,6 +2,9 @@
 
 CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモノを掴みます
 
+![demo](https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/demo.gif "demo")
+
+
 ## Usage
 
 ### CRANE-X7のパッケージのインストール方法
