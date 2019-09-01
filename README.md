@@ -1,4 +1,4 @@
-# Crane_x7 PCL Pick_up
+# crane_x7_pcl_pickup
 
 CRANE-X7のためのパッケージ、PCL(Point Cloud Library)を使用してモノを掴みます
 
@@ -14,7 +14,7 @@ Gazebo上で動くことを確認してください
 
   ```bash
   cd ~/catkin_ws/src
-  git clone https://github.com/kusanoo/my_crane_x7.git
+  git clone https://github.com/kusanoo/crane_x7_pcl_pickup.git
   ```
 
 - `catkin_make`を使用してビルドします
@@ -26,7 +26,7 @@ Gazebo上で動くことを確認してください
 
 ### ロボットのCameraの設定方法
   
-`crane_x7_description/urdf/crane_x7_mounting_plate.xacro` を `my_crane_x7/urdf/crane_x7_mounting_plate.xacro` と入れ替える
+`crane_x7_description/urdf/crane_x7_mounting_plate.xacro` を `crane_x7_pcl_pickup/urdf/crane_x7_mounting_plate.xacro` と入れ替える
 
 以下のコマンドを実行し、確認します
 
@@ -34,7 +34,7 @@ Gazebo上で動くことを確認してください
 roslaunch crane_x7_description display.launch
 ```
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/rviz.png" width="640px">
+<img src="https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/rviz.png" width="640px">
 
 上のようになったら成功です
 
@@ -47,34 +47,34 @@ roslaunch crane_x7_gazebo crane_x7_with_table.launch use_effort_gripper:=true　
 立ち上がったら、次のコマンドで点群の処理を実行します
 
 ```sh
-rosrun my_crane_x7 pcl_clustering
+rosrun crane_x7_pcl_pickup pcl_clustering
 ``` 
 
 ### Rvizで maker を追加する
 
 addを押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/add.png" width="640px">
+<img src="https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/add.png" width="640px">
 
 By topic を押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/by_topic.png" width="640px">
+<img src="https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/by_topic.png" width="640px">
 
 MarkerArrayを選択し,OKを押します
 
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker.png" width="640px">
+<img src="https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/marker.png" width="640px">
 
 Rviz上に紫のクラスタが表示されます
   
-<img src="https://github.com/kusanoo/my_crane_x7/blob/master/image/marker_2.png" width="640px">
+<img src="https://github.com/kusanoo/crane_x7_pcl_pickup/blob/master/image/marker_2.png" width="640px">
    
 ### モノを掴むスクリプトの実行
 
 ```sh
-rosrun my_crane_x7 pick_up_object.py
+rosrun crane_x7_pcl_pickup pick_up_object.py
 ``` 
 
-動作させると[こちら](https://youtu.be/ZMpj_mBggjw)のような動きになります
+動作させると[こちらの動画](https://youtu.be/ZMpj_mBggjw)のような動きになります
 
 ## 参考サイト
 
